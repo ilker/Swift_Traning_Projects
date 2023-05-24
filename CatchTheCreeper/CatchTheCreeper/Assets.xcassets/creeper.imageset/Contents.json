@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "80578-creeper-sticker-minecraft-brand-logo-free-download-png-hq-thumb.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
