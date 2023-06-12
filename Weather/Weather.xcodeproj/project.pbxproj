@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52E22D362A37DC1B00614EE6 /* SearchStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E22D352A37DC1B00614EE6 /* SearchStackView.swift */; };
 		52F2418B2A375A8600196CDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2418A2A375A8600196CDE /* AppDelegate.swift */; };
 		52F2418F2A375A8600196CDE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2418E2A375A8600196CDE /* HomeViewController.swift */; };
 		52F241942A375A8700196CDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F241932A375A8700196CDE /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52E22D352A37DC1B00614EE6 /* SearchStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStackView.swift; sourceTree = "<group>"; };
 		52F241872A375A8600196CDE /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F2418A2A375A8600196CDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52F2418E2A375A8600196CDE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +35,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52E22D342A37DC0200614EE6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52E22D352A37DC1B00614EE6 /* SearchStackView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		52F2417E2A375A8600196CDE = {
 			isa = PBXGroup;
 			children = (
@@ -52,6 +62,7 @@
 		52F241892A375A8600196CDE /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				52E22D342A37DC0200614EE6 /* View */,
 				52F2419F2A375C9E00196CDE /* Controller */,
 				52F2419E2A375C7E00196CDE /* Files */,
 			);
@@ -147,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52E22D362A37DC1B00614EE6 /* SearchStackView.swift in Sources */,
 				52F2418F2A375A8600196CDE /* HomeViewController.swift in Sources */,
 				52F2418B2A375A8600196CDE /* AppDelegate.swift in Sources */,
 			);
