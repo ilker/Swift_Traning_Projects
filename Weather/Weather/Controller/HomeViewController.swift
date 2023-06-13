@@ -10,6 +10,9 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     // MARK: - Properties
+    var viewModel: WeatherViewModel? {
+        didSet { configure() }
+    }
     private let backgroundImageView = UIImageView()
     private let mainStackView = UIStackView()
     private let searchStackView = SearchStackView()
@@ -17,6 +20,7 @@ class HomeViewController: UIViewController {
     private let temperatureLabel = UILabel()
     private let cityLabel = UILabel()
     private let locationManager = CLLocationManager()
+    private let service = WeatherService()
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,7 @@ extension HomeViewController {
         searchStackView.translatesAutoresizingMaskIntoConstraints = false
         searchStackView.spacing = 8
         searchStackView.axis = .horizontal
+        searchStackView.delegate = self
         //mainStackView style
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.spacing = 10
@@ -52,7 +57,8 @@ extension HomeViewController {
         //cityLabel style
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         cityLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        cityLabel.text = "Hatay"
+        cityLabel.text = "Paris"
+        
     }
     private func layout()  {
         view.addSubview(backgroundImageView)
@@ -93,15 +99,58 @@ extension HomeViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
     }
+    private func configure() {
+        guard let viewModel = self.viewModel else { return }
+        self.cityLabel.text = viewModel.cityName
+        self.temperatureLabel.attributedText = attributedText(with: viewModel.temperatureString!)
+        self.statusImageView.image = UIImage(systemName: viewModel.statusName)
+    }
+    private func showErrorAlert(forErrorMessage message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
+    private func parseError(error: ServiceError) {
+        switch error {
+        case .serverError:
+            showErrorAlert(forErrorMessage: error.rawValue)
+        case .decodingError:
+            showErrorAlert(forErrorMessage: error.rawValue)
+        }
+    }
 
 }
 // MARK: - CLLocationManagerDelegate
 extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last!
-        print(location.coordinate.latitude)
-        print(location.coordinate.longitude)
         locationManager.stopUpdatingLocation()
+        self.service.fetchWeatherLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { result in
+            switch result {
+                
+            case .success(let result):
+                self.viewModel = WeatherViewModel(weatherModel: result)
+            case .failure(let error):
+                self.parseError(error: error)
+            }
+        }
     }
 }
-
+// MARK: - SearchStackViewDelegate
+extension HomeViewController: SearchStackViewDelegate {
+    func updatingLocation(_ searchStackView: SearchStackView) {
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    func didFailWithError(_ searchStackViw: SearchStackView, error: ServiceError) {
+        parseError(error: error)
+    }
+    
+    
+    
+    func didFetchWeather(_ searchStackView: SearchStackView, weatherModel: WeatherModel) {
+        self.viewModel = WeatherViewModel(weatherModel: weatherModel)
+    }
+    
+    
+}

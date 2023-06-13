@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		521B6CE42A389B7C0052839D /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521B6CE32A389B7C0052839D /* WeatherViewModel.swift */; };
 		52BAF2BC2A38620800B77011 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BAF2BB2A38620800B77011 /* WeatherModel.swift */; };
 		52BAF2BF2A38635D00B77011 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BAF2BE2A38635D00B77011 /* WeatherService.swift */; };
 		52E22D362A37DC1B00614EE6 /* SearchStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E22D352A37DC1B00614EE6 /* SearchStackView.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		521B6CE32A389B7C0052839D /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		52BAF2BB2A38620800B77011 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		52BAF2BE2A38635D00B77011 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		52E22D352A37DC1B00614EE6 /* SearchStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStackView.swift; sourceTree = "<group>"; };
@@ -39,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		521B6CE22A389B650052839D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				521B6CE32A389B7C0052839D /* WeatherViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		52BAF2BA2A3861F900B77011 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +95,7 @@
 				52BAF2BD2A38634D00B77011 /* Service */,
 				52BAF2BA2A3861F900B77011 /* Model */,
 				52E22D342A37DC0200614EE6 /* View */,
+				521B6CE22A389B650052839D /* ViewModel */,
 				52F2419F2A375C9E00196CDE /* Controller */,
 				52F2419E2A375C7E00196CDE /* Files */,
 			);
@@ -181,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52BAF2BF2A38635D00B77011 /* WeatherService.swift in Sources */,
+				521B6CE42A389B7C0052839D /* WeatherViewModel.swift in Sources */,
 				52E22D362A37DC1B00614EE6 /* SearchStackView.swift in Sources */,
 				52F2418F2A375A8600196CDE /* HomeViewController.swift in Sources */,
 				52BAF2BC2A38620800B77011 /* WeatherModel.swift in Sources */,

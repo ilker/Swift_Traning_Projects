@@ -6,28 +6,38 @@
 //
 
 import Foundation
+import CoreLocation
 
-enum ServiceError: Error {
-case serverError
-case decodingError
+enum ServiceError: String, Error {
+case serverError = "Check your network connection!"
+case decodingError = "Decoding Error!"
 }
 
 struct WeatherService {
     let url = "https://api.openweathermap.org/data/2.5/weather?&appid=b76bcaba7a3be2b8494b366c98efadc4&units=metric"
-    
-    func fetchWeather(forCityName cityName: String, completion: @escaping(Result<WeatherModel,ServiceError>) -> Void) {
+        
+    func fetchWeatherCityName(forCityName cityName: String, completion: @escaping(Result<WeatherModel,ServiceError>) -> Void) {
         let url = URL(string: "\(url)&q=\(cityName)")!
+        fetchWeather(url: url, completion: completion)
+    }
+    func fetchWeatherLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping(Result<WeatherModel,ServiceError>) -> Void) {
+        let url = URL(string: "\(url)&lat=\(latitude)&lon=\(longitude)")!
+        fetchWeather(url: url, completion: completion)
+    }
+    private func fetchWeather(url: URL, completion: @escaping(Result<WeatherModel,ServiceError>) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
-            guard error == nil else {
-                completion(.failure(.serverError))
-                return
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    completion(.failure(.serverError))
+                    return
+                }
+                guard let data = data else { return }
+                guard let result = parseJSON(data: data) else {
+                    completion(.failure(.decodingError))
+                    return
+                }
+                completion(.success(result))
             }
-            guard let data = data else { return }
-            guard let result = parseJSON(data: data) else {
-                completion(.failure(.decodingError))
-                return
-            }
-            completion(.success(result))
         }.resume()
     }
     private func parseJSON(data: Data) -> WeatherModel? {

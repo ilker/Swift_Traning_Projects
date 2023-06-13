@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol SearchStackViewDelegate: AnyObject {
+    func didFetchWeather(_ searchStackView: SearchStackView, weatherModel: WeatherModel)
+    func didFailWithError(_ searchStackViw: SearchStackView, error: ServiceError)
+    func updatingLocation(_ searchStackView: SearchStackView)
+}
+
 class SearchStackView: UIStackView {
     // MARK: - Properties
+    weak var delegate: SearchStackViewDelegate?
     private let locationButton = UIButton(type: .system)
     private let searchButton = UIButton(type: .system)
     private let searchTextField = UITextField()
@@ -34,6 +41,7 @@ extension SearchStackView {
         locationButton.layer.cornerRadius = 40 / 2
         locationButton.contentVerticalAlignment = .fill
         locationButton.contentHorizontalAlignment = .fill
+        locationButton.addTarget(self, action: #selector(handleLocationButton), for: .touchUpInside)
         //searchButton style
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
@@ -45,10 +53,11 @@ extension SearchStackView {
         //searchTextField style
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.placeholder = "Search..."
-        searchTextField.font = UIFont.preferredFont(forTextStyle: .title1)
+        searchTextField.font = UIFont.preferredFont(forTextStyle: .title1) 
         searchTextField.borderStyle = .roundedRect
         searchTextField.textAlignment = .center
         searchTextField.backgroundColor = .systemFill
+        searchTextField.delegate = self
     }
     private func layout() {
         addArrangedSubview(locationButton)
@@ -70,13 +79,35 @@ extension SearchStackView {
 // MARK: - Selector
 extension SearchStackView {
     @objc private func handleSearchButton(_ sender: UIButton) {
-        service.fetchWeather(forCityName: "hatay") { result in
+        self.searchTextField.endEditing(true)
+    }
+    @objc private func handleLocationButton(_ sender: UIButton) {
+        self.delegate?.updatingLocation(self)
+    }
+}
+// MARK: - UITextFieldDelegate
+extension SearchStackView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return self.searchTextField.endEditing(true)
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if searchTextField.text != "" {
+            return true
+        }else {
+            searchTextField.placeholder = "Search..."
+            return false
+        }
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let cityName = searchTextField.text else { return }
+        service.fetchWeatherCityName(forCityName: cityName) { result in
             switch result {
             case .success(let result):
-                print(result.main.temp)
-            case .failure(_):
-                print("Error")
+                self.delegate?.didFetchWeather(self, weatherModel: result)
+            case .failure(let error):
+                self.delegate?.didFailWithError(self, error: error)
             }
         }
+        self.searchTextField.text = ""
     }
 }
