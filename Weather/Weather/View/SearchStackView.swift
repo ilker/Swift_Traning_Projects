@@ -100,7 +100,22 @@ extension SearchStackView: UITextFieldDelegate {
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let cityName = searchTextField.text else { return }
-        service.fetchWeatherCityName(forCityName: cityName) { result in
+        //Replacing Turkish characters with their Unicode equivalents
+        let convertedCityName = cityName
+            .replacingOccurrences(of: "İ", with: "\u{0069}")
+            .replacingOccurrences(of: "ı", with: "\u{0049}")
+            .replacingOccurrences(of: "ş", with: "\u{0073}")
+            .replacingOccurrences(of: "Ş", with: "\u{0053}")
+            .replacingOccurrences(of: "ğ", with: "\u{0067}")
+            .replacingOccurrences(of: "Ğ", with: "\u{0047}")
+            .replacingOccurrences(of: "ç", with: "\u{0063}")
+            .replacingOccurrences(of: "Ç", with: "\u{0043}")
+            .replacingOccurrences(of: "ö", with: "\u{006f}")
+            .replacingOccurrences(of: "Ö", with: "\u{004f}")
+            .replacingOccurrences(of: "ü", with: "\u{0075}")
+            .replacingOccurrences(of: "Ü", with: "\u{0055}")
+        
+        service.fetchWeatherCityName(forCityName: convertedCityName) { result in
             switch result {
             case .success(let result):
                 self.delegate?.didFetchWeather(self, weatherModel: result)

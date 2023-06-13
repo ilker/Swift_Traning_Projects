@@ -57,7 +57,6 @@ extension HomeViewController {
         //cityLabel style
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         cityLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        cityLabel.text = "Paris"
         
     }
     private func layout()  {

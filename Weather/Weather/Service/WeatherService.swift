@@ -17,8 +17,10 @@ struct WeatherService {
     let url = "https://api.openweathermap.org/data/2.5/weather?&appid=b76bcaba7a3be2b8494b366c98efadc4&units=metric"
         
     func fetchWeatherCityName(forCityName cityName: String, completion: @escaping(Result<WeatherModel,ServiceError>) -> Void) {
-        let url = URL(string: "\(url)&q=\(cityName)")!
-        fetchWeather(url: url, completion: completion)
+        if let url = URL(string: "\(url)&q=\(cityName)") {
+            fetchWeather(url: url, completion: completion)
+        }
+        
     }
     func fetchWeatherLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping(Result<WeatherModel,ServiceError>) -> Void) {
         let url = URL(string: "\(url)&lat=\(latitude)&lon=\(longitude)")!
