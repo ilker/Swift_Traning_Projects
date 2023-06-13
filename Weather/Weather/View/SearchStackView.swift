@@ -12,6 +12,7 @@ class SearchStackView: UIStackView {
     private let locationButton = UIButton(type: .system)
     private let searchButton = UIButton(type: .system)
     private let searchTextField = UITextField()
+    private let service = WeatherService()
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +41,7 @@ extension SearchStackView {
         searchButton.layer.cornerRadius = 40 / 2
         searchButton.contentVerticalAlignment = .fill
         searchButton.contentHorizontalAlignment = .fill
+        searchButton.addTarget(self, action: #selector(handleSearchButton), for: .touchUpInside)
         //searchTextField style
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.placeholder = "Search..."
@@ -62,5 +64,19 @@ extension SearchStackView {
             searchButton.heightAnchor.constraint(equalToConstant: 40),
             searchButton.widthAnchor.constraint(equalToConstant: 40),
         ])
+    }
+}
+
+// MARK: - Selector
+extension SearchStackView {
+    @objc private func handleSearchButton(_ sender: UIButton) {
+        service.fetchWeather(forCityName: "hatay") { result in
+            switch result {
+            case .success(let result):
+                print(result.main.temp)
+            case .failure(_):
+                print("Error")
+            }
+        }
     }
 }
