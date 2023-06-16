@@ -22,16 +22,27 @@ class MainViewController: UITableViewController {
 // MARK: - Helpers
 extension MainViewController {
     private func configureView() {
-        
+        view.backgroundColor = .white
+    }
+    private func configureNavigaiton() {
+        self.navigationItem.title = "University"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     func setup() {
         configureView()
         registerTableView()
         getData()
+        configureNavigaiton()
     }
     func getData() {
-        viewModel.getData { result in
-            self.dataResult = result
+        viewModel.getData {[weak self] result in
+            guard let self = self else { return }
+            guard let resultData = result else { return }
+            self.dataResult = resultData
         }
+    }
+    func createMainCellViewModel(model: University) -> MainViewCellViewModel {
+        let cellModel = MainViewCellViewModel(model: model)
+        return cellModel
     }
 }
