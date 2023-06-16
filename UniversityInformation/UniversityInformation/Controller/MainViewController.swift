@@ -9,10 +9,10 @@ import UIKit
 
 class MainViewController: UITableViewController {
     // MARK: - Properties
-    var viewModel = MainViewModel()
     var dataResult: [University] = [] {
         didSet{ tableView.reloadData() }
     }
+    var viewModel = MainViewModel()
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,7 +13,7 @@ struct University: Decodable {
     let domains: [String]
     let name: String
     
-    private enum CodignKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case country, domains, name
         case webPages = "web_pages"
     }
