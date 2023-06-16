@@ -21,6 +21,10 @@ class MainViewController: UITableViewController {
     func setup() {
         configureView()
         registerTableView()
+        getData()
+    }
+    func getData() {
+        viewModel.getData()
     }
 
 }

@@ -8,6 +8,11 @@
 import Foundation
 
 class MainViewModel {
+    
+    func getData() {
+        Service.getData()
+    }
+    
     func numberOfRowsInSection(_ section: Int) -> Int {
         return 10
     }
