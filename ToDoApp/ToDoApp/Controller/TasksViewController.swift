@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+
 class TasksViewController: UIViewController {
     // MARK: - Properties
     private lazy var newTaskButton: UIButton = {
@@ -22,6 +24,7 @@ class TasksViewController: UIViewController {
         super.viewDidLoad()
         style()
         layout()
+        
     }
 }
 // MARK: - Selector
