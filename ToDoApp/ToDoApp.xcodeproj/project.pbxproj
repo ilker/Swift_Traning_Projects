@@ -52,6 +52,7 @@
 		528294AE2B0E0BD0001DB3DB /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 528294AD2B0E0BD0001DB3DB /* FirebaseStorageCombine-Community */; };
 		528294B12B0E0D72001DB3DB /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528294B02B0E0D72001DB3DB /* AuthenticationService.swift */; };
 		528C79D02B1F870A00B7D017 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C79CF2B1F870A00B7D017 /* Service.swift */; };
+		52F294902B2082AF00DEED29 /* TasksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2948F2B2082AF00DEED29 /* TasksCell.swift */; };
 		52F601C82B0E9BDE00018F01 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F601C72B0E9BDE00018F01 /* MainTabBarViewController.swift */; };
 		52F601CB2B0EA01A00018F01 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 52F601CA2B0EA01A00018F01 /* JGProgressHUD */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		528294762B0E0B5B001DB3DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		528294B02B0E0D72001DB3DB /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		528C79CF2B1F870A00B7D017 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		52F2948F2B2082AF00DEED29 /* TasksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksCell.swift; sourceTree = "<group>"; };
 		52F601C72B0E9BDE00018F01 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 			children = (
 				5203B4792B06C860007D8C3A /* AuthenticationInputView.swift */,
 				5203B47B2B06C999007D8C3A /* CustomTextField.swift */,
+				52F2948F2B2082AF00DEED29 /* TasksCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				5257C9DF2B0F7C5400018BBD /* InputTextView.swift in Sources */,
 				522F445F2B07FF93005B0349 /* LoginViewModel.swift in Sources */,
 				5203B45D2B06A684007D8C3A /* AppDelegate.swift in Sources */,
+				52F294902B2082AF00DEED29 /* TasksCell.swift in Sources */,
 				528C79D02B1F870A00B7D017 /* Service.swift in Sources */,
 				5257C9DD2B0F7AB600018BBD /* NewTaskViewController.swift in Sources */,
 				5203B47A2B06C860007D8C3A /* AuthenticationInputView.swift in Sources */,
