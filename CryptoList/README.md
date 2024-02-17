@@ -1,1 +1,1 @@
-My first MVVM project.
+My first MVVM project
